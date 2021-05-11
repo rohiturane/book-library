@@ -25,7 +25,7 @@ class Books
         $validateData = ['title','author','isbn'];
         foreach($validateData as $validate)
         {
-            if(!array_key_exists($validate, $params) && empty($params[$validate]))
+            if(!in_array($validate, $params) && empty($params[$validate]))
             {
                 $errors[$validate][] = $validate.' is required';
             }
@@ -33,6 +33,7 @@ class Books
         if(!empty($errors)) {
             http_response_code(422);
             echo json_encode(['errors'=> $errors]);
+            exit;
         }
         $title = mysqli_real_escape_string($this->con, $params['title']);
         $author = mysqli_real_escape_string($this->con, $params['author']);
@@ -69,7 +70,7 @@ class Books
         $validateData = ['title','author','isbn'];
         foreach($validateData as $validate)
         {
-            if(!array_key_exists($validate, $params) && empty($params[$validate]))
+            if(!in_array($validate, $params) && empty($params[$validate]))
             {
                 $errors[$validate][] = $validate.' is required';
             }
@@ -77,6 +78,7 @@ class Books
         if(!empty($errors)) {
             http_response_code(422);
             echo json_encode(['errors'=> $errors]);
+            exit;
         }
         $title = mysqli_real_escape_string($this->con, $params['title']);
         $author = mysqli_real_escape_string($this->con, $params['author']);
